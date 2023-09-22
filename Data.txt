@@ -1,0 +1,91 @@
+Ports:
+p1 - Port 1, 30.0, -90.0, true
+p2 - Port 2, 40.0, -80.0, true
+
+p3 - Port 3, 50.0, -70.0, false
+p4 - Port 4, 60.0, -60.0, true
+p5 - Port 5, 70.0, -50.0, true
+Vehicles:
+s1 - Ship 1, 10000, 100000, p1
+s2 - Ship 2, 8000, 80000, p2
+
+s3 - Ship 3, 6000, 60000, p3
+t1 - Truck 1, 20, 200, p1
+t2 - Truck 2, 20, 200, p2
+t3 - Truck 3, 20, 200, p3
+t4 - Truck 4, 20, 200, p4
+t5 - Truck 5, 20, 200, p5
+t6 - Truck 6, 20, 200, p1
+t7 - Truck 7, 20, 200, p2
+t8 - Truck 8, 20, 200, p3
+t9 - Truck 9, 20, 200, p4
+t10 - Truck 10, 20, 200, p5
+t11 - Truck 11, 20, 200, p1
+t12 - Truck 12, 20, 200, p2
+t13 - Truck 13, 20, 200, p3
+t14 - Truck 14, 20, 200, p4
+t15 - Truck 15, 20, 200, p5
+t16 - Truck 16, 20, 200, p1
+t17 - Truck 17, 20, 200, p2
+t18 - Truck 18, 20, 200, p3
+t19 - Truck 19, 20, 200, p4
+t20 - Truck 20, 20, 200, p5
+Containers:
+c1 - Container 1, Dry Storage, 500, p1
+c2 - Container 2, Open Top, 1000, p2
+c3 - Container 3, Refrigerated, 1500, p3
+c4 - Container 4, Liquid, 2000, p4
+c5 - Container 5, Dry Storage, 500, p5
+c6 - Container 6, Open Top, 1000, p1
+c7 - Container 7, Refrigerated, 1500, p2
+c8 - Container 8, Liquid, 2000, p3
+c9 - Container 9, Dry Storage, 500, p4
+c10 - Container 10, Open Top, 1000, p5
+c11 - Container 11, Refrigerated, 1500, p1
+c12 - Container 12, Liquid, 2000, p2
+c13 - Container 13, Dry Storage, 500, p3
+c14 - Container 14, Open Top, 1000, p4
+c15 - Container 15, Refrigerated, 1500, p5
+c16 - Container 16, Liquid, 2000, p1
+c17 - Container 17, Dry Storage, 500, p2
+c18 - Container 18, Open Top, 1000, p3
+c19 - Container 19, Refrigerated, 1500, p4
+c20 - Container 20, Liquid, 2000, p5
+c21 - Container 21, Dry Storage, 500, p1
+c22 - Container 22, Open Top, 1000, p2
+c23 - Container 23, Refrigerated, 1500, p3
+c24 - Container 24, Liquid, 2000, p4
+c25 - Container 25, Dry Storage, 500, p5
+c26 - Container 26, Open Top, 1000, p1
+
+c27 - Container 27, Refrigerated, 1500, p2
+c28 - Container 28, Liquid, 2000, p3
+c29 - Container 29, Dry Storage, 500, p4
+c30 - Container 30, Open Top, 1000, p5
+Trips:
+t1 from p1 to p2 on 1/1/2023
+s1 from p2 to p3 on 2/1/2023
+
+t3 from p3 to p4 on 3/1/2023
+s2 from p4 to p5 on 4/1/2023
+t5 from p5 to p1 on 5/1/2023
+t6 from p1 to p2 on 6/1/2023
+s3 from p2 to p3 on 7/1/2023
+t8 from p3 to p4 on 8/1/2023
+s1 from p4 to p5 on 9/1/2023
+t10 from p5 to p1 on 10/1/2023
+t11 from p1 to p2 on 11/1/2023
+s2 from p2 to p3 on 12/1/2023
+t13 from p3 to p4 on 13/1/2023
+s3 from p4 to p5 on 14/1/2023
+t15 from p5 to p1 on 15/1/2023
+t16 from p1 to p2 on 16/1/2023
+s1 from p2 to p3 on 17/1/2023
+t18 from p3 to p4 on 18/1/2023
+s2 from p4 to p5 on 19/1/2023
+t20 from p5 to p1 on 20/1/2023
+t21 from p1 to p2 on 21/1/2023
+s3 from p2 to p3 on 22/1/2023
+t23 from p3 to p4 on 23/1/2023
+s1 from p4 to p5 on 24/1/2023
+t25 from p5 to p1 on 25/1/2023
