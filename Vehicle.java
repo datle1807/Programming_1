@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Vehicle {
     protected String ID;
     protected String name;
@@ -6,6 +8,13 @@ public abstract class Vehicle {
     protected double currentFuel;
     protected Port currentPort;
     protected int totalContainers;
+    protected double fuelLevel;
+
+
+
+    public String getName() {
+        return name;
+    }
 
     public Vehicle(String ID, String name, double carryingCapacity, double fuelCapacity) {
         this.ID = ID;
@@ -21,22 +30,12 @@ public abstract class Vehicle {
 
     public abstract void unloadContainer(Container container);
 
-    public boolean canMoveToPort(Port port) {
-        return port.hasLandingAbility() && calculateDistance(currentPort, port) <= currentFuel;
+    public double getCurrentFuel() {
+        return currentFuel;
     }
 
-    public void moveToPort(Port port) {
-        if (canMoveToPort(port)) {
-            currentPort = port;
-            double distance = calculateDistance(currentPort, port);
-            currentFuel -= distance;
-        } else {
-            System.out.println("Vehicle cannot move to the specified port.");
-        }
-    }
-
-    public void refuel() {
-        currentFuel = fuelCapacity;
+    public void setCurrentFuel(double currentFuel) {
+        this.currentFuel = currentFuel;
     }
 
     protected void incrementTotalContainers() {
@@ -46,9 +45,16 @@ public abstract class Vehicle {
     protected void decrementTotalContainers() {
         totalContainers--;
     }
-
-    private double calculateDistance(Port port1, Port port2) {
-        // Implement the distance calculation logic here
-        return 0.0;
+    public abstract void refuel(); // for truck
+    public void setCurrentPort(Port port) {
+        currentPort = port;
     }
+    public abstract void refuel(double amount); // for ship
+    public abstract double getFuelConsumptionRate();
+
+    public String getId() {
+        return ID;
+    }
+
+
 }
