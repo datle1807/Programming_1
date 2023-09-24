@@ -1,0 +1,7 @@
++Ports:
+p1 - Port 1, 30.0, -90.0, true
+p2 - Port 2, 40.0, -80.0, true
+
+p3 - Port 3, 50.0, -70.0, false
+p4 - Port 4, 60.0, -60.0, true
+p5 - Port 5, 70.0, -50.0, true
