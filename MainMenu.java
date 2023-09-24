@@ -47,7 +47,7 @@ public class MainMenu {
                     System.out.println("Thank you! Bye Bye!");
                     break;
                 case 1:
-                    /* Customer Login */
+                    /* Port Manager Login */
                     PortHandler.login();
                     break;
                 case 2:

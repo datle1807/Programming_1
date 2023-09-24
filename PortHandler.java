@@ -7,10 +7,12 @@ import java.util.Scanner;
 
 
 public class PortHandler {
+    static Scanner scanner = new Scanner(System.in);
+
     private List<Port> ports = new ArrayList<>();
-    private PortManagerList portManagerList = new PortManagerList();
+    private static PortManagerList portManagerList = new PortManagerList();
     private final static File PORTMANAGER_FILE = new File("./src/PORTMANAGER.txt");
-    private PortManager currentPortManager;
+    private static PortManager currentPortManager;
 
     public List<Port> getPorts() {
         return ports;
@@ -57,7 +59,8 @@ public class PortHandler {
         // Add new customer to customer.txt
         FileManager.writeToFile(String.valueOf(PORTMANAGER_FILE), newPortManager);
     }
-    private String loginInput() {
+
+    private static String loginInput() {
         // Get username from user
         System.out.println("Please enter your username: ");
         String username = User.scanner.nextLine();
@@ -73,7 +76,8 @@ public class PortHandler {
 
         return "," + username + "," + password + ",";
     }
-    public void login() throws Exception {
+
+    public static void login() throws Exception {
 
         System.out.println("------------PORT LOGIN PAGE ------------");
         /* todo */
@@ -91,75 +95,8 @@ public class PortHandler {
             }
         }
     }
-    public boolean checkUser(String user) {
-        try {
-            Scanner scanner = new Scanner(PORTMANAGER_FILE);
 
-            //now read the file line by line...
-            int lineNum = 0;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                lineNum++;
-                if (line.contains(user)) {
-                    return true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            //handle this
-        }
-        return false;
-    }
-    private boolean loginVerify(String user) {
-        for (PortManager portManager : portManagerList.getPortManagerList()) {
-            if (checkUser(user) && user.equals("," + portManager.getUsername() + "," + portManager.getPassword() + ",")) {
-                this.currentPortManager = new PortManager(portManager.getID(), portManager.getUsername(), portManager.getPassword(),
-                        portManager.getName());
-                return true;
-            }
-        }
-
-        return false;
-    }
-    // Add port
-    public void updateFile(String text, Integer action) throws IOException {
-
-        for (PortManager customer : portManagerList.getPortManagerList()) {
-            if (customer.getID().equalsIgnoreCase(currentPortManager.getID())) {
-
-                if (action.equals(1)) {
-                    customer.setPassword(text);
-                    break;
-                } else if (action.equals(2)) {
-                    customer.setName(text);
-                    break;
-            }
-        }
-
-        FileManager.updateContent(String.valueOf(PORTMANAGER_FILE), portManagerList.getPortManagerList());
-
-        System.out.println("Update your information successfully!");
-    }
-
-    // Get port
-    public Port getPort(String name) {
-        return ports.stream()
-                .filter(p -> p.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new PortNotFoundException());
-    }
-
-    // Update port
-    public void updatePort(Port port) {
-        int index = ports.indexOf(getPort(port.getName()));
-        ports.set(index, port);
-    }
-
-    // Delete port
-    public void removePort(String name) {
-        ports.remove(getPort(name));
-    }
-
-    public void menuPort(/* todo */) throws Exception {
+    private static void menuPort() throws Exception{
         boolean flag = true;
         byte action;
 
@@ -181,7 +118,119 @@ public class PortHandler {
                     System.out.println("Please enter a number from 1 to 8! ");
             }
         }
-
     }
 
+
+    public static boolean checkUser(String user) {
+        try {
+            Scanner scanner = new Scanner(PORTMANAGER_FILE);
+
+            //now read the file line by line...
+            int lineNum = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                lineNum++;
+                if (line.contains(user)) {
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            //handle this
+        }
+        return false;
+    }
+
+    private static boolean loginVerify(String user) {
+        for (PortManager portManager : portManagerList.getPortManagerList()) {
+            if (checkUser(user) && user.equals("," + portManager.getUsername() + "," + portManager.getPassword() + ",")) {
+                currentPortManager = new PortManager(portManager.getID(), portManager.getUsername(), portManager.getPassword(),
+                        portManager.getName());
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Add port
+    public static void updateFile(String text, Integer action) throws IOException {
+
+        for (PortManager portManager : portManagerList.getPortManagerList()) {
+            if (portManager.getID().equalsIgnoreCase(currentPortManager.getID())) {
+
+                if (action.equals(1)) {
+                    portManager.setPassword(text);
+                    break;
+                } else if (action.equals(2)) {
+                    portManager.setName(text);
+                    break;
+                }
+            }
+
+            FileManager.updateContent(String.valueOf(PORTMANAGER_FILE), portManagerList.getPortManagerList());
+
+            System.out.println("Update your information successfully!");
+        }
+    }
+
+    public static void update() throws IOException {
+        int mode;
+        boolean isRunning = true;
+
+        /* todo Update Write to Customer.txt File */
+
+        while (isRunning) {
+            System.out.println("Choose what information you want to change update: ");
+            System.out.println("0. Exit");
+            System.out.println("1. Password");
+            System.out.println("2. Name");
+            System.out.println("3. Email");
+            System.out.println("4. Address");
+            System.out.println("5. Phone");
+            System.out.println("Enter mode pls: ");
+            mode = scanner.nextInt();
+            scanner.nextLine();
+            switch (mode) {
+                case 0:
+                    isRunning = false;
+                    break;
+                case 1:
+                    System.out.println("Enter new password: ");
+                    String password = scanner.nextLine();
+                    while (!User.validatePassword(password)) {
+                        User.passwordConditions();
+                        System.out.println("Please enter your password again: ");
+                        password = scanner.nextLine();
+                    }
+                    updateFile(password, 1);
+                    break;
+                case 2:
+                    System.out.println("Enter new name: ");
+                    String name = scanner.nextLine();
+                    updateFile(name, 2);
+                    break;
+                default:
+                    System.out.println("Enter mode again: ");
+                    mode = scanner.nextByte();
+            }
+
+        }
+    }
+
+
+    private static void viewInfo() {
+        System.out.printf("ID: %s\n", currentPortManager.getID());
+        System.out.printf("Username: %s\n", currentPortManager.getUsername());
+        System.out.printf("Password: %s\n", currentPortManager.getPassword());
+        System.out.printf("Name: %s\n", currentPortManager.getName());
+    }
+
+    private static byte display() {
+        System.out.println("------------ CUSTOMER HOMEPAGE ------------");
+        System.out.println("0. Logout.");
+        System.out.println("1. View all your information.");
+        System.out.println("2. Update your information.");
+        System.out.println("You can choose action by entering a number: ");
+        return scanner.nextByte();
+    }
 }

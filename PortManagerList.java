@@ -62,13 +62,13 @@ public class PortManagerList {
     // --- Delete a customer by ID --- //
     public void delete() throws FileNotFoundException {
         PortManager result = null;
-        System.out.println("Enter Customer's ID: ");
+        System.out.println("Enter Port Manager's ID: ");
         String ID = scanner.next();
 
-        for (PortManager cus : portManagerList) {
-            if (cus.getID().equalsIgnoreCase(ID)) {
-                result = cus;
-                this.portManagerList.remove(cus);
+        for (PortManager por : portManagerList) {
+            if (por.getID().equalsIgnoreCase(ID)) {
+                result = por;
+                this.portManagerList.remove(por);
                 break;
             }
         }
@@ -80,7 +80,7 @@ public class PortManagerList {
         FileManager.updateContent(String.valueOf(PORTMANAGER_FILE), portManagerList);
     }
 
-    // --- Display all customer ---
+    // --- Display all port manager ---
     public void display() throws IOException {
 
         for (PortManager portManager : portManagerList) {

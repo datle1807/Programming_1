@@ -26,38 +26,58 @@ public class AdminInterface {
 
     }
 
-    private void loadVehicles() throws IOException {
+    private void loadVehicles() {
 
-        Scanner scanner = new Scanner(new File("vehicle-data.txt"));
+        try {
 
-        while(scanner.hasNextLine()) {
+            List<Vehicle> vehicles = new ArrayList<>();
 
-            String line = scanner.nextLine();
-            String[] parts = line.split(",");
+            Scanner scanner = new Scanner(new File("vehicles.txt"));
 
-            //parse id
-            String id = parts[0];
+            while(scanner.hasNextLine()) {
 
-            //parse name
-            String name = parts[1];
+                String line = scanner.nextLine();
 
-            //parse other fields
-            String type = parts[2];
-            int capacity = Integer.parseInt(parts[3]);
+                String[] details = line.split(",");
 
-            Vehicle vehicle;
+                String type = details[0];
+                String id = details[1];
+                String name = details[2];
+                double carryingCapacity = Double.parseDouble(details[3]);
+                double fuelCapacity = Double.parseDouble(details[4]);
 
-            if(type.equals("Ship")) {
-                vehicle = new Ship(id, name, capacity);
+                Vehicle vehicle;
+
+                if(type.equals("Ship")) {
+
+                    // Create concrete ship
+
+                    vehicle = new CargoShip(id, name, carryingCapacity, fuelCapacity);
+
+                } else if(type.equals("Truck")) {
+
+                    // Create concrete truck
+                    vehicle = new BoxTruck(id, name, carryingCapacity, fuelCapacity);
+
+                }
+                else {
+                    // handle invalid type
+                    continue;
+                }
+
+                vehicles.add(vehicle);
+
             }
-            else {
-                vehicle = new Truck(id, name, capacity);
-            }
 
-            vehicles.add(vehicle);
+            this.vehicles = vehicles;
 
+        } catch (IOException e) {
+            // handle error
         }
+
     }
+
+
 
     private void loadContainers() throws IOException {
 
@@ -115,16 +135,6 @@ public class AdminInterface {
             processChoice(choice);
         }
     }
-
-    private void processChoice(int choice) {
-    }
-
-    private int getMenuChoice() {
-    }
-
-    private void displayMenu() {
-    }
-
     void login() {
         //login code
         Scanner input = new Scanner(System.in);
@@ -154,8 +164,6 @@ public class AdminInterface {
         return false;
 
     }
-}
-
     private void displayMenu() {
         //menu options
         System.out.println("Admin Menu");
@@ -238,6 +246,27 @@ public class AdminInterface {
         }
     }
 
+    private void assignVehicleToPort() {
+    }
+
+    private void loadUnloadContainers() {
+    }
+
+    private void logout() {
+    }
+
+    private void viewPorts() {
+    }
+
+    private void addPort() {
+    }
+
+    private void viewContainers() {
+    }
+
+    private void addContainer() {
+    }
+
     private void addVehicle() {
         //get details
         //create vehicle
@@ -253,15 +282,21 @@ public class AdminInterface {
         System.out.print("Enter vehicle type (Ship/Truck): ");
         String type = input.nextLine();
 
+        System.out.print("Enter vehicle carryingCapacity (Ship/Truck): ");
+        double carryingCapacity = Double.parseDouble(input.nextLine());
+
+        System.out.print("Enter vehicle fuelCapacity (Ship/Truck): ");
+        double fuelCapacity = Double.parseDouble(input.nextLine());
+
         Vehicle vehicle;
 
         if(type.equalsIgnoreCase("Ship")) {
             //get ship details
-            vehicle = new Ship(id, name, //ship details);
+            vehicle = new Ship(id, name, carryingCapacity, fuelCapacity);
 
         } else if(type.equalsIgnoreCase("Truck")){
             //get truck details
-            vehicle = new Truck(id, name, //truck details);
+            vehicle = new Truck(id, name, carryingCapacity, fuelCapacity);
 
         } else {
             System.out.println("Invalid vehicle type");
@@ -307,5 +342,8 @@ public class AdminInterface {
     //inner classes
 }
 
-}
+
+    
+
+
 
