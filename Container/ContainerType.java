@@ -1,7 +1,6 @@
-// ContainerType.java
+package Container;
 
 public enum ContainerType {
-
     DRY_STORAGE,
     OPEN_TOP,
     OPEN_SIDE,

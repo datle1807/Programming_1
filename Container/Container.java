@@ -1,3 +1,4 @@
+package Container;
 public class Container {
     private String ID;
     private double weight;
@@ -8,7 +9,6 @@ public class Container {
         this.weight = weight;
         this.type = type;
     }
-
     public ContainerType getContainerType() {
         return type;
     }
